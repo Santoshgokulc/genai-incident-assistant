@@ -2,7 +2,7 @@
 
 **Date:** November 15, 2026  
 **Curriculum Alignment:** Phase 0 — Environment Setup & Python Muscle Memory (Days 1–3)  
-**Status:** Infrastructure Complete → Advancing to Drill 1  
+**Status:** Infrastructure Complete & Version Control Setup → Advancing to Drill 1  
 
 ---
 
@@ -24,7 +24,7 @@ Aligned repository layout to match clean architecture specifications:
 - `src/app/`: Core application modules (`core/`, `schemas/`, `repositories/`, `services/`, `api/v1/`).
 - `drills/`: Sequential muscle-memory drills (`drill_1_logs.py`, `drill_2_schemas.py`, `drill_3_health.py`).
 - `tests/`: Automated test suite (`test_drills.py`, `test_health.py`, `conftest.py`).
-- `learning_history/`: Progress and review tracking.
+- `learning_history/`: Progress, SOPs, and review tracking.
 
 ---
 
@@ -45,7 +45,53 @@ Configured and launched local containerized backend services via `docker-compose
 
 ---
 
-## 4. Current Milestone & Next Objective
+## 4. Standard Operating Procedure (SOP): GitHub Authentication via PAT
+
+Because GitHub disabled password authentication for Git CLI operations, use this SOP when authenticating HTTPS remotes with a Personal Access Token (PAT).
+
+### Step 1: Generate the Token in GitHub
+1. In your browser, navigate to: **GitHub $\rightarrow$ Settings $\rightarrow$ Developer Settings $\rightarrow$ Personal access tokens $\rightarrow$ Tokens (classic)**.
+   - Direct link: `https://github.com/settings/tokens`
+2. Click **Generate new token** $\rightarrow$ **Generate new token (classic)**.
+3. Fill in:
+   - **Note:** Descriptive name (e.g. `workstation-linux-cli`).
+   - **Expiration:** Choose your preferred duration (e.g., 30, 60, or 90 days).
+   - **Scopes:** Select **`repo`** (Full control of private repositories: repo status, repo deployment, public_repo, repo:invite, security_events).
+4. Scroll to the bottom and click **Generate token**.
+5. **Immediate Action:** Copy the token string (`ghp_...`). It will never be displayed again.
+
+### Step 2: Configure Git Remote & Push
+1. Ensure your local branch is `main`:
+   ```bash
+   git branch -M main
+   ```
+2. Link the HTTPS remote if not already linked:
+   ```bash
+   git remote add origin https://github.com/<your-username>/genai-incident-assistant.git
+   # Or update existing remote:
+   # git remote set-url origin https://github.com/<your-username>/genai-incident-assistant.git
+   ```
+3. Push to remote:
+   ```bash
+   git push -u origin main
+   ```
+4. When prompted by the CLI:
+   - **Username:** Your GitHub username.
+   - **Password:** Paste the token (`ghp_...`). *(Characters will not echo on screen for security)*.
+
+### Step 3: (Optional) Cache Credentials Locally
+To avoid pasting the token on every `git push`/`git pull`:
+```bash
+# Cache in memory for 1 hour (3600 seconds)
+git config --global credential.helper "cache --timeout=3600"
+
+# Or store securely on disk (unencrypted plain text in ~/.git-credentials)
+# git config --global credential.helper store
+```
+
+---
+
+## 5. Current Milestone & Next Objective
 - **Active Task:** **Drill 1: Unstructured Log Ingestion & Cascade Detection** (`drills/drill_1_logs.py`).
 - **Goal:** Implement standard-library log parsing, service error rate calculation, and failure filtering using modern Python 3.12 idioms (built-in generics, frozen slotted dataclasses, comprehensions).
 - **Rule Enforcement:** Zero AI code generation; user authoring 100% of the implementation followed by mentor code review.
