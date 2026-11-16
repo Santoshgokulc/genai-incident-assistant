@@ -91,7 +91,10 @@ git config --global credential.helper "cache --timeout=3600"
 
 ---
 
-## 5. Current Milestone & Next Objective
-- **Active Task:** **Drill 1: Unstructured Log Ingestion & Cascade Detection** (`drills/drill_1_logs.py`).
-- **Goal:** Implement standard-library log parsing, service error rate calculation, and failure filtering using modern Python 3.12 idioms (built-in generics, frozen slotted dataclasses, comprehensions).
-- **Rule Enforcement:** Zero AI code generation; user authoring 100% of the implementation followed by mentor code review.
+## 5. Completed Drills & Current Milestone
+- **Drill 1: Unstructured Log Ingestion & Cascade Detection** (`drills/drill_1_logs.py`) — **COMPLETED & VERIFIED** ✅
+  - Implemented immutable `LogEntry` dataclass, named-group regex parsing (`parse_log_line`), list comprehension filtering (`filter_logs_by_level`), and $O(n)$ frequency aggregation (`calculate_error_rates`).
+  - Full retrospective & cheatsheet documented in [drill_1_summary.md](file:///home/user/Projects/genai-incident-assistant/learning_history/drill_1_summary.md).
+- **Active Task:** **Drill 2: Incident Schema Validation & State Transitions** (`drills/drill_2_schemas.py`).
+  - **Prerequisite:** **Logic Gate 2** (State Machines & Edge Cases: deduplicating records, merging overlapping intervals, or validating deterministic state transitions).
+  - **Rule Enforcement:** Zero AI code generation; user authoring 100% of the implementation followed by mentor code review.
