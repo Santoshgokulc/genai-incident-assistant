@@ -95,6 +95,8 @@ git config --global credential.helper "cache --timeout=3600"
 - **Drill 1: Unstructured Log Ingestion & Cascade Detection** (`drills/drill_1_logs.py`) — **COMPLETED & VERIFIED** ✅
   - Implemented immutable `LogEntry` dataclass, named-group regex parsing (`parse_log_line`), list comprehension filtering (`filter_logs_by_level`), and $O(n)$ frequency aggregation (`calculate_error_rates`).
   - Full retrospective & cheatsheet documented in [drill_1_summary.md](file:///home/user/Projects/genai-incident-assistant/learning_history/drill_1_summary.md).
-- **Active Task:** **Drill 2: Incident Schema Validation & State Transitions** (`drills/drill_2_schemas.py`).
-  - **Prerequisite:** **Logic Gate 2** (State Machines & Edge Cases: deduplicating records, merging overlapping intervals, or validating deterministic state transitions).
+- **Drill 2: Incident Schema Validation & State Transitions** (`drills/drill_2_schemas.py`) — **COMPLETED & VERIFIED** ✅
+  - Implemented deterministic FSM transitions (`validate_incident_transitions`), `IncidentReport` dataclass with `field(default_factory=list)`, `__post_init__` severity validation, `transition_to` lifecycle state updates, `to_dict` serialization via `asdict`, and $O(n)$ key-based deduplication (`deduplicate_incidents`).
+  - Full retrospective & cheatsheet documented in [drill_2_summary.md](file:///home/user/Projects/genai-incident-assistant/learning_history/drill_2_summary.md).
+- **Active Task:** **Drill 3: Backend Health Checks & Redis/Postgres Status Probes** (`drills/drill_3_health.py`).
   - **Rule Enforcement:** Zero AI code generation; user authoring 100% of the implementation followed by mentor code review.
